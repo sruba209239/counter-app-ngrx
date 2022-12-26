@@ -31,7 +31,8 @@ const _counterReducer = createReducer(initialState,
     on(customInputReduce, (state, action) => {
         console.log(action)
         return {
-            ...state
+            ...state,
+            counter: state.counter - action.reduceValue
         }
     })
 );
