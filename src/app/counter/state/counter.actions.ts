@@ -6,3 +6,4 @@ export const reset = createAction('reset');
 
 export const customInputAdd = createAction('customInputAdd', props<{ addValue: number }>());
 export const customInputReduce = createAction('customInputReduce', props<{ reduceValue: number }>());
+export const updateText = createAction('updateText', props<{ text: string }>());

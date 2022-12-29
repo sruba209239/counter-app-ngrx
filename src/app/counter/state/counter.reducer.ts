@@ -1,6 +1,6 @@
 import { createReducer, on, ReducerTypes, REDUCER_FACTORY } from "@ngrx/store";
 import { Action } from "rxjs/internal/scheduler/Action";
-import { customInputAdd, customInputReduce, decrement, increment, reset } from "./counter.actions";
+import { customInputAdd, customInputReduce, decrement, increment, reset, updateText } from "./counter.actions";
 import { initialState } from "./counter.state";
 
 const _counterReducer = createReducer(initialState,
@@ -29,10 +29,15 @@ const _counterReducer = createReducer(initialState,
         }
     }),
     on(customInputReduce, (state, action) => {
-        console.log(action)
         return {
             ...state,
             counter: state.counter - action.reduceValue
+        }
+    }),
+    on(updateText, (state, action) => {
+        return {
+            ...state,
+            text: action.text
         }
     })
 );
