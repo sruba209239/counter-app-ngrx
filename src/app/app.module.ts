@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -14,6 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { PostsListComponent } from './posts/posts-list/posts-list.component';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { PostsListComponent } from './posts/posts-list/posts-list.component';
     FormsModule,
     StoreModule.forRoot({ counter: counterReducer }),
     AppRoutingModule,
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
   providers: [],
   bootstrap: [AppComponent],
