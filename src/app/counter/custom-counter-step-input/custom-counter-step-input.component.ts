@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import {
   customInputAdd,
   customInputReduce,
@@ -14,19 +14,15 @@ import { CounterState } from '../state/counter.state';
   templateUrl: './custom-counter-step-input.component.html',
   styleUrls: ['./custom-counter-step-input.component.css'],
 })
-export class CustomCounterStepInputComponent implements OnInit, OnDestroy {
+export class CustomCounterStepInputComponent implements OnInit {
   counterAdd: number = 1;
   counterReduce: number = 1;
-  stateText: string = '';
-  subscription!: Subscription;
+  stateText$!: Observable<string>;
 
   constructor(private store: Store<{ counter: CounterState }>) {}
 
   ngOnInit() {
-    this.subscription = this.store.select(getText).subscribe((data) => {
-      console.log('text subscription');
-      this.stateText = data;
-    });
+    this.stateText$ = this.store.select(getText);
   }
 
   onAdd() {
@@ -39,9 +35,5 @@ export class CustomCounterStepInputComponent implements OnInit, OnDestroy {
 
   updateText(): void {
     this.store.dispatch(updateText({ text: 'updated text' }));
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
   }
 }
