@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
+import { AppState } from 'src/app/state/app.state';
 import {
   customInputAdd,
   customInputReduce,
@@ -19,7 +20,7 @@ export class CustomCounterStepInputComponent implements OnInit {
   counterReduce: number = 1;
   stateText$!: Observable<string>;
 
-  constructor(private store: Store<{ counter: CounterState }>) {}
+  constructor(private store: Store<AppState>) {}
 
   ngOnInit() {
     this.stateText$ = this.store.select(getText);
